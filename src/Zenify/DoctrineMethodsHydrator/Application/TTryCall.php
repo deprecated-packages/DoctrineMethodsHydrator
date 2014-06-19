@@ -31,12 +31,12 @@ trait TTryCall
 		$presenter = $this;
 		$rc = $presenter->getReflection();
 		if ( ! $rc->hasMethod($method)) {
-			return false;
+			return FALSE;
 		}
 
 		$rm = $rc->getMethod($method);
 		if ( ! $rm->isPublic() || $rm->isAbstract() || $rm->isStatic()) {
-			return false;
+			return FALSE;
 		}
 
 		$presenter->checkRequirements($rm);
@@ -48,7 +48,7 @@ trait TTryCall
 
 		$rm->invokeArgs($this, $args);
 
-		return true;
+		return TRUE;
 	}
 
 }
