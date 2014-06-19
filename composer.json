@@ -1,0 +1,21 @@
+{
+	"name": "zenify/doctrine-methods-hydrator",
+	"description": "Doctrine ",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Tomáš Votruba",
+			"homepage": "http://tomasvotruba.cz"
+		}
+	],
+	"require": {
+		"php": ">=5.4",
+		"kdyby/doctrine": "@dev",
+		"nette/application": "@dev"
+	},
+	"autoload": {
+		"psr-0": {
+			"Zenify\\": "src/"
+		}
+	}
+}
