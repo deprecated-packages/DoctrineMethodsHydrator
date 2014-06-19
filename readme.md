@@ -10,16 +10,8 @@ See section `require` in [composer.json](composer.json).
 
 The best way to install is using [Composer](http://getcomposer.org/).
 
-Add to your `composer.json`:
-
-```yaml
-"require": {
-        "zenify/doctrine-methods-hydrator": "@dev",
-}
-```
-
 ```sh
-$ composer update
+$ composer require zenify/doctrine-methods-hydrator:@dev
 ```
 
 Register the extension in `config.neon`:
@@ -29,7 +21,7 @@ extensions:
 	- Zenify\DoctrineMethodsHydrator\DI\Extension
 ```
 
-Place trait to your parent presenter 
+Place trait to your parent presenter: 
 
 ```php
 class Presenter extends Nette\Application\UI\Presenter 
@@ -44,8 +36,7 @@ class Presenter extends Nette\Application\UI\Presenter
 
 In template
 
-```smarty
-
+```html
 <a n:href="Product:detail, product => $product->id">Product detail</a>
 ```
 
@@ -57,7 +48,7 @@ class SomePresenter extends Presenter
 	
 	public function actionDetail(Product $product) 
 	{
-		dd($product); // Product entity 
+		dump($product); // Product entity 
 	}
 
 }

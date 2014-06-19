@@ -1,6 +1,6 @@
 {
 	"name": "zenify/doctrine-methods-hydrator",
-	"description": "Doctrine ",
+	"description": "Hydrates presenter methods from parameters to entities",
 	"license": "MIT",
 	"authors": [
 		{
