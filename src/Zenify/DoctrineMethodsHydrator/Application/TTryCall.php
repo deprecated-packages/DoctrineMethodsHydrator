@@ -15,7 +15,7 @@ trait TTryCall
 {
 	/**
 	 * @inject
-	 * @var Zenify\DoctrineMethodsHydrator\ParametersToEntitiesConvertor
+	 * @var \Zenify\DoctrineMethodsHydrator\ParametersToEntitiesConvertor
 	 */
 	public $parametersToEntitiesConvertor;
 
