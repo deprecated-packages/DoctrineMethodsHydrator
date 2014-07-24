@@ -26,7 +26,7 @@ class ParametersToEntitiesConvertor extends Nette\Object
 
 
 	/**
-	 * @return []
+	 * @return mixed[]
 	 */
 	public function process(array $methodParameters, array $args)
 	{
@@ -52,8 +52,8 @@ class ParametersToEntitiesConvertor extends Nette\Object
 	private function findById($entityName, $id)
 	{
 		$entity = $this->entityManager->find($entityName, $id);
-		if ($entity == NULL) {
-			throw new BadRequestException("Value '$id' not found in collection '$entityName'.");
+		if ($entity === NULL) {
+			throw new BadRequestException("Id '$id' for entity '$entityName' was not found.");
 		}
 
 		return $entity;
