@@ -32,8 +32,7 @@ class ParametersToEntitiesConvertor extends Nette\Object
 	{
 		foreach ($methodParameters as $i => $parameter) {
 			if ($className = $parameter->className) {
-				$rc = ClassType::from($className);
-				if ($rc->is('Kdyby\Doctrine\Entities\BaseEntity') && ($args[$i] !== NULL || $args[$i] !== FALSE)) {
+				if ($this->isEntity($className) && ($args[$i] !== NULL || $args[$i] !== FALSE)) {
 					$args[$i] = $this->findById($className, $args[$i]);
 				}
 			}
@@ -47,7 +46,7 @@ class ParametersToEntitiesConvertor extends Nette\Object
 	 * @param string
 	 * @param int
 	 * @return object|NULL
-	 * @throws  BadRequestException
+	 * @throws BadRequestException
 	 */
 	private function findById($entityName, $id)
 	{
@@ -57,6 +56,16 @@ class ParametersToEntitiesConvertor extends Nette\Object
 		}
 
 		return $entity;
+	}
+
+
+	/**
+	 * @param string
+	 * @return bool
+	 */
+	private function isEntity($className)
+	{
+		return ! $this->entityManager->getMetadataFactory()->isTransient($className);
 	}
 
 }
