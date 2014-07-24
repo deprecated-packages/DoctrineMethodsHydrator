@@ -16,12 +16,12 @@ use Nette\Reflection\ClassType;
 class ParametersToEntitiesConvertor extends Nette\Object
 {
 	/** @var EntityManager */
-	private $entityManager;
+	private $em;
 
 
-	public function __construct(EntityManager $entityManager)
+	public function __construct(EntityManager $em)
 	{
-		$this->entityManager = $entityManager;
+		$this->em = $em;
 	}
 
 
@@ -50,7 +50,7 @@ class ParametersToEntitiesConvertor extends Nette\Object
 	 */
 	private function findById($entityName, $id)
 	{
-		$entity = $this->entityManager->find($entityName, $id);
+		$entity = $this->em->find($entityName, $id);
 		if ($entity === NULL) {
 			throw new BadRequestException("Id '$id' for entity '$entityName' was not found.");
 		}
@@ -65,7 +65,7 @@ class ParametersToEntitiesConvertor extends Nette\Object
 	 */
 	private function isEntity($className)
 	{
-		return ! $this->entityManager->getMetadataFactory()->isTransient($className);
+		return ! $this->em->getMetadataFactory()->isTransient($className);
 	}
 
 }
