@@ -65,7 +65,13 @@ class ParametersToEntitiesConvertor extends Nette\Object
 	 */
 	private function isEntity($className)
 	{
-		return ! $this->em->getMetadataFactory()->isTransient($className);
+		try {
+			$this->em->getClassMetadata($className);
+			return TRUE;
+
+		} catch (\Exception $e) {
+			return FALSE;
+		}
 	}
 
 }
