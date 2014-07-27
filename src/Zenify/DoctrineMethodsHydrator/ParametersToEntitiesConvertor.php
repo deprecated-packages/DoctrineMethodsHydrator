@@ -7,10 +7,10 @@
 
 namespace Zenify\DoctrineMethodsHydrator;
 
+use Doctrine;
 use Kdyby\Doctrine\EntityManager;
 use Nette;
 use Nette\Application\BadRequestException;
-use Nette\Reflection\ClassType;
 
 
 class ParametersToEntitiesConvertor extends Nette\Object
@@ -65,7 +65,13 @@ class ParametersToEntitiesConvertor extends Nette\Object
 	 */
 	private function isEntity($className)
 	{
-		return ! $this->em->getMetadataFactory()->isTransient($className);
+		try {
+			$this->em->getClassMetadata($className);
+			return TRUE;
+
+		} catch (Doctrine\Common\Persistence\Mapping\MappingException $e) {
+			return FALSE;
+		}
 	}
 
 }
