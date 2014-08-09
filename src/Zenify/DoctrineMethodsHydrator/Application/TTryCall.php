@@ -43,7 +43,7 @@ trait TTryCall
 		$args = $rc->combineArgs($rm, $parameters);
 
 		if (preg_match('~^(action|render|handle).+~', $method)) {
-			$args = $this->parametersToEntitiesConvertor->process($rm->parameters, $args);
+			$args = $this->getConvertor()->process($rm->parameters, $args);
 		}
 
 		$rm->invokeArgs($this, $args);
@@ -51,6 +51,19 @@ trait TTryCall
 		return TRUE;
 	}
 
+
+	/**
+	 * @return Zenify\DoctrineMethodsHydrator\ParametersToEntitiesConvertor
+	 */
+	private function getConvertor()
+	{
+		if ($this->parametersToEntitiesConvertor == NULL) {
+			$this->parametersToEntitiesConvertor = $this->getPresenter()
+				->getContext()
+				->getByType('Zenify\DoctrineMethodsHydrator\ParametersToEntitiesConvertor');
+		}
+
+		return $this->parametersToEntitiesConvertor;
+	}
+
 }
-
-
