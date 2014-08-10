@@ -7,10 +7,13 @@
 
 namespace Zenify\DoctrineMethodsHydrator\Application;
 
-use Nette\Application\UI\Presenter;
+use Nette;
 use Zenify;
 
 
+/**
+ * @method Nette\Application\UI\Presenter getPresenter()
+ */
 trait TTryCall
 {
 	/**
@@ -27,8 +30,7 @@ trait TTryCall
 	 */
 	protected function tryCall($method, array $parameters)
 	{
-		/** @var Presenter $presenter */
-		$presenter = $this;
+		$presenter = $this->getPresenter();
 		$rc = $presenter->getReflection();
 		if ( ! $rc->hasMethod($method)) {
 			return FALSE;
@@ -57,7 +59,7 @@ trait TTryCall
 	 */
 	private function getConvertor()
 	{
-		if ($this->parametersToEntitiesConvertor == NULL) {
+		if ($this->parametersToEntitiesConvertor === NULL) {
 			$this->parametersToEntitiesConvertor = $this->getPresenter()
 				->getContext()
 				->getByType('Zenify\DoctrineMethodsHydrator\ParametersToEntitiesConvertor');
