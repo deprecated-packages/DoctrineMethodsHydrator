@@ -1,5 +1,8 @@
 # Zenify/DoctrineMethodsHydrator
 
+[![Build Status](https://travis-ci.org/Zenify/DoctrineMethodsHydrator.svg?branch=master)](https://travis-ci.org/Zenify/DoctrineMethodsHydrator)
+[![Downloads this Month](https://img.shields.io/packagist/dm/zenify/doctrine-methods-hydrator.svg)](https://packagist.org/packages/zenify/doctrine-methods-hydrator)
+
 
 ## Installation
 
@@ -41,9 +44,9 @@ In presenter
 class SomePresenter extends Presenter
 {
 
-	public function actionDetail(Product $product)
+	public function actionDetail(App\Entities\Product $product)
 	{
-		dump($product); // Product entity
+		dump($product); // entity object
 	}
 
 }
