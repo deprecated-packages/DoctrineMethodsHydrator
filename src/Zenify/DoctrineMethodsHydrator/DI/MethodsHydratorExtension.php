@@ -7,12 +7,11 @@
 
 namespace Zenify\DoctrineMethodsHydrator\DI;
 
-use Nette;
+use Nette\DI\CompilerExtension;
 
 
-class Extension extends Nette\DI\CompilerExtension
+class MethodsHydratorExtension extends CompilerExtension
 {
-
 
 	public function loadConfiguration()
 	{
