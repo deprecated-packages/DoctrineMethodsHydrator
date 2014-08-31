@@ -52,7 +52,7 @@ class ParametersToEntitiesConvertor extends Nette\Object
 	{
 		$entity = $this->em->find($entityName, $id);
 		if ($entity === NULL) {
-			throw new BadRequestException("Id '$id' for entity '$entityName' was not found.");
+			throw new BadRequestException('Entity "' . $entityName . '" with id = "' . $id . '" was not found.');
 		}
 
 		return $entity;
