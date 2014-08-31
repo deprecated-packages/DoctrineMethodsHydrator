@@ -25,6 +25,19 @@ class MockPresenter extends Nette\Application\UI\Presenter
 	}
 
 
+
+	public function actionEdit(Product $product)
+	{
+		$this->product = $product;
+	}
+
+
+	public function handleDelete(Product $product)
+	{
+		$this->product = $product;
+	}
+
+
 	public function renderCategory(Category $category)
 	{
 		$this->category = $category;
@@ -38,6 +51,15 @@ class MockPresenter extends Nette\Application\UI\Presenter
 	public function sendTemplate()
 	{
 		$this->terminate();
+	}
+
+
+	/**
+	 * @return MockControl
+	 */
+	protected function createComponentMockControl()
+	{
+		return new MockControl;
 	}
 
 }
