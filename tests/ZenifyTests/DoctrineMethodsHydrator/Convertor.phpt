@@ -39,9 +39,7 @@ class ConvertorTest extends BaseTestCase
 	protected function setUp()
 	{
 		$this->prepareDbData();
-		$this->presenter = new MockPresenter;
-		$this->container->callInjects($this->presenter);
-
+		$this->buildPresenter();
 	}
 
 
@@ -92,6 +90,13 @@ class ConvertorTest extends BaseTestCase
 		$em = $this->container->getByType('Doctrine\ORM\EntityManager');
 		$em->persist($product);
 		$em->flush();
+	}
+
+
+	private function buildPresenter()
+	{
+		$this->presenter = new MockPresenter;
+		$this->container->callMethod(array($this->presenter, 'injectPrimary'));
 	}
 
 }
