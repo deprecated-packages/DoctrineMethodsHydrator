@@ -1,11 +1,6 @@
 # Zenify/DoctrineMethodsHydrator
 
 
-## Requirements
-
-See section `require` in [composer.json](composer.json).
-
-
 ## Installation
 
 The best way to install is using [Composer](http://getcomposer.org/).
@@ -18,13 +13,13 @@ Register the extension in `config.neon`:
 
 ```yaml
 extensions:
-	- Zenify\DoctrineMethodsHydrator\DI\Extension
+	- Zenify\DoctrineMethodsHydrator\DI\MethodsHydratorExtension
 ```
 
-Place trait to your parent presenter: 
+Place trait to your parent presenter or control:
 
 ```php
-class Presenter extends Nette\Application\UI\Presenter 
+class Presenter extends Nette\Application\UI\Presenter
 {
 	use Zenify\DoctrineMethodsHydrator\Application\TTryCall;
 
@@ -43,16 +38,13 @@ In template
 In presenter
 
 ```php
-class SomePresenter extends Presenter 
+class SomePresenter extends Presenter
 {
-	
-	public function actionDetail(Product $product) 
+
+	public function actionDetail(Product $product)
 	{
-		dump($product); // Product entity 
+		dump($product); // Product entity
 	}
 
 }
 ```
-
-
-
