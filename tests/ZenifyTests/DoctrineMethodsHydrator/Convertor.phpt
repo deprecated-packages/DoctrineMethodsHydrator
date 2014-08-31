@@ -59,11 +59,12 @@ class ConvertorTest extends BaseTestCase
 	}
 
 
+	/**
+	 * @throws \Doctrine\ORM\Mapping\MappingException
+	 */
 	public function testNotEntity()
 	{
-		Assert::exception(function() {
-			$this->callPresenterAction($this->presenter, 'category', ['category' => 5]);
-		}, 'Doctrine\ORM\Mapping\MappingException', 'Class "ZenifyTests\DoctrineMethodsHydrator\Entities\Category" sub class of "Nette\Object" is not a valid entity or mapped super class.');
+		$this->callPresenterAction($this->presenter, 'category', ['category' => 5]);
 	}
 
 
@@ -95,19 +96,21 @@ class ConvertorTest extends BaseTestCase
 	}
 
 
+	/**
+	 * @throws \Doctrine\ORM\ORMException
+	 */
 	public function testNoValue()
 	{
-		Assert::exception(function() {
-			$this->callPresenterAction($this->presenter, 'product');
-		}, 'Doctrine\ORM\ORMException', 'The identifier id is missing for a query of ZenifyTests\DoctrineMethodsHydrator\Entities\Product');
+		$this->callPresenterAction($this->presenter, 'product');
 	}
 
 
+	/**
+	 * @throws \Nette\Application\BadRequestException
+	 */
 	public function testNotExistingId()
 	{
-		Assert::exception(function() {
-			$this->callPresenterAction($this->presenter, 'product', ['product' => 5]);
-		}, 'Nette\Application\BadRequestException', 'Entity "ZenifyTests\DoctrineMethodsHydrator\Entities\Product" with id = "5" was not found.');
+		$this->callPresenterAction($this->presenter, 'product', ['product' => 5]);
 	}
 
 
