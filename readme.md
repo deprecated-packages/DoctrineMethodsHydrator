@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Zenify/DoctrineMethodsHydrator.svg?branch=master)](https://travis-ci.org/Zenify/DoctrineMethodsHydrator)
 [![Downloads this Month](https://img.shields.io/packagist/dm/zenify/doctrine-methods-hydrator.svg)](https://packagist.org/packages/zenify/doctrine-methods-hydrator)
+[![Latest stable](https://img.shields.io/packagist/v/zenify/doctrine-methods-hydrator.svg)](https://packagist.org/packages/zenify/doctrine-methods-hydrator)
 
 
 ## Installation
