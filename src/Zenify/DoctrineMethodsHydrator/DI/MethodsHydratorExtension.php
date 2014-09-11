@@ -16,7 +16,7 @@ class MethodsHydratorExtension extends CompilerExtension
 	public function loadConfiguration()
 	{
 		$builder = $this->getContainerBuilder();
-		$builder->addDefinition($this->prefix('convetor'))
+		$builder->addDefinition($this->prefix('convertor'))
 			->setClass('Zenify\DoctrineMethodsHydrator\ParametersToEntitiesConvertor');
 	}
 
