@@ -96,12 +96,10 @@ class ConvertorTest extends BaseTestCase
 	}
 
 
-	/**
-	 * @throws \Doctrine\ORM\ORMException
-	 */
 	public function testNoValue()
 	{
 		$this->callPresenterAction($this->presenter, 'product');
+		Assert::same($this->presenter->product, NULL);
 	}
 
 
