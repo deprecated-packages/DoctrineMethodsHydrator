@@ -19,7 +19,13 @@ class MockPresenter extends Nette\Application\UI\Presenter
 	public $category;
 
 
-	public function renderProduct(Product $product = NULL)
+	public function renderProduct(Product $product)
+	{
+		$this->product = $product;
+	}
+	
+	
+	public function renderProductOptional(Product $product = null)
 	{
 		$this->product = $product;
 	}

@@ -96,9 +96,18 @@ class ConvertorTest extends BaseTestCase
 	}
 
 
+	/**
+	 * @throws Nette\InvalidArgumentException
+	 */
 	public function testNoValue()
 	{
 		$this->callPresenterAction($this->presenter, 'product');
+	}
+
+
+	public function testNoValueOptional()
+	{
+		$this->callPresenterAction($this->presenter, 'productOptional');
 		Assert::same($this->presenter->product, NULL);
 	}
 

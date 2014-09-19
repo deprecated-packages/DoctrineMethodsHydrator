@@ -48,7 +48,16 @@ trait TTryCall
 			$args = $this->getConvertor()->process($rm->parameters, $args);
 		}
 
+		set_error_handler(function($severity, $message) use ($args) { // zachytávání chyb
+			restore_error_handler();
+			if($args[0] === NULL)
+			{
+				throw new Nette\InvalidArgumentException($message);
+			} 
+			throw new \Exception;
+		});
 		$rm->invokeArgs($this, $args);
+		restore_error_handler();
 
 		return TRUE;
 	}
