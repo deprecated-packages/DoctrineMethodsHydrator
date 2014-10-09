@@ -96,12 +96,18 @@ class ConvertorTest extends BaseTestCase
 	}
 
 
-	/**
-	 * @throws \Doctrine\ORM\ORMException
-	 */
 	public function testNoValue()
 	{
-		$this->callPresenterAction($this->presenter, 'product');
+		Assert::error(function() {
+			$this->callPresenterAction($this->presenter, 'product');
+		}, E_RECOVERABLE_ERROR);
+	}
+
+
+	public function testNoValueOptional()
+	{
+		$this->callPresenterAction($this->presenter, 'productOptional');
+		Assert::same($this->presenter->product, NULL);
 	}
 
 

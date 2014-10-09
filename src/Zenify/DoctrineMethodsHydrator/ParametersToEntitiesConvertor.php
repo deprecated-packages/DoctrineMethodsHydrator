@@ -32,7 +32,7 @@ class ParametersToEntitiesConvertor extends Nette\Object
 	{
 		foreach ($methodParameters as $i => $parameter) {
 			if ($className = $parameter->className) {
-				if ($this->isEntity($className) && ($args[$i] !== NULL || $args[$i] !== FALSE)) {
+				if ($this->isEntity($className) && $args[$i] !== NULL && $args[$i] !== FALSE) {
 					$args[$i] = $this->findById($className, $args[$i]);
 				}
 			}
