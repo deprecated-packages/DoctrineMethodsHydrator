@@ -12,7 +12,8 @@ use Zenify;
 
 
 /**
- * @method Nette\Application\UI\Presenter getPresenter()
+ * @method  Nette\Application\UI\Presenter                      getPresenter()
+ * @method  Nette\Application\UI\PresenterComponentReflection   getReflection()
  */
 trait TTryCall
 {
@@ -30,8 +31,7 @@ trait TTryCall
 	 */
 	protected function tryCall($method, array $parameters)
 	{
-		$presenter = $this->getPresenter();
-		$rc = $presenter->getReflection();
+		$rc = $this->getReflection();
 		if ( ! $rc->hasMethod($method)) {
 			return FALSE;
 		}
@@ -41,7 +41,7 @@ trait TTryCall
 			return FALSE;
 		}
 
-		$presenter->checkRequirements($rm);
+		$this->getPresenter()->checkRequirements($rm);
 		$args = $rc->combineArgs($rm, $parameters);
 
 		if (preg_match('~^(action|render|handle).+~', $method)) {
