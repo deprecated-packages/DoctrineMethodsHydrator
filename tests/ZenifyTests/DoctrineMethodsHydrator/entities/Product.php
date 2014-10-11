@@ -13,6 +13,8 @@ use Nette;
  * @method  int     getId()
  * @method  string  getName()
  * @method  Product setName()
+ * @method  string  getSlug()
+ * @method  Product setSlug()
  */
 class Product extends Nette\Object
 {
@@ -28,5 +30,11 @@ class Product extends Nette\Object
 	 * @var string
 	 */
 	protected $name;
+
+	/**
+	 * @ORM\Column(type="string", nullable=TRUE)
+	 * @var string
+	 */
+	protected $slug;
 
 }

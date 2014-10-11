@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Test: Zenify\DoctrineMethodsHydrator\Convertor.
+ * Test: Zenify\DoctrineMethodsHydrator\AnnotationConvertor.
  *
  * @testCase
  * @package Zenify\DoctrineMethodsHydrator
@@ -16,18 +16,18 @@ use Tester\Assert;
 use Zenify;
 use ZenifyTests\DoctrineMethodsHydrator\Entities\Product;
 use ZenifyTests\DoctrineMethodsHydrator\UI\MockControl;
-use ZenifyTests\DoctrineMethodsHydrator\UI\MockPresenter;
+use ZenifyTests\DoctrineMethodsHydrator\UI\MockAnnotationPresenter;
 
 
 $container = require_once __DIR__ . '/../bootstrap.php';
 
 
-class ConvertorTest extends BaseTestCase
+class AnnotationConvertorTest extends BaseTestCase
 {
 	/** @var Nette\DI\Container */
 	private $container;
 
-	/** @var MockPresenter */
+	/** @var MockAnnotationPresenter */
 	private $presenter;
 
 
@@ -66,35 +66,89 @@ class ConvertorTest extends BaseTestCase
 	{
 		$this->callPresenterAction($this->presenter, 'category', ['category' => 5]);
 	}
-
-
-	public function testConvertor()
+	
+	
+	public function testFullAnnotation()
 	{
 		// render
-		$this->callPresenterAction($this->presenter, 'product', ['product' => 1]);
+		$this->callPresenterAction($this->presenter, 'productFullAnnotation', ['product' => 'brand-new-ruler']);
 		Assert::type('ZenifyTests\DoctrineMethodsHydrator\Entities\Product', $this->presenter->product);
 		Assert::same($this->presenter->product->getId(), 1);
 
 		$this->presenter->product = NULL;
 		Assert::null($this->presenter->product);
-
-		// action
-		$this->callPresenterAction($this->presenter, 'edit', ['product' => 1]);
-		Assert::type('ZenifyTests\DoctrineMethodsHydrator\Entities\Product', $this->presenter->product);
-		Assert::same($this->presenter->product->getId(), 1);
-
-		$this->presenter->product = NULL;
-		Assert::null($this->presenter->product);
-
-		// handle
-		$this->callPresenterAction($this->presenter, 'default', [
-			'do' => 'delete',
-			'product' => 1
-		]);
+	}
+	
+	
+	public function testtypeHint()
+	{
+		$this->callPresenterAction($this->presenter, 'productTypeHint', ['product' => 'brand-new-ruler']);
 		Assert::type('ZenifyTests\DoctrineMethodsHydrator\Entities\Product', $this->presenter->product);
 		Assert::same($this->presenter->product->getId(), 1);
 	}
-
+	
+	
+	public function testByName()
+	{
+		$this->callPresenterAction($this->presenter, 'productByName', ['product' => 'Brand new ruler']);
+		Assert::type('array', $this->presenter->product);
+		Assert::same($this->presenter->product[0]->getId(), 1);
+		Assert::same($this->presenter->product[1]->getId(), 2);
+	}
+	
+	
+	public function testConvertParam()
+	{
+		$this->callPresenterAction($this->presenter, 'productConvertParam', ['slug' => 'brand-new-ruler-2', 'name' => 'Brand new ruler']);
+		Assert::type('array', $this->presenter->product);
+		Assert::type('string', $this->presenter->slug);
+		Assert::same($this->presenter->product[0]->getId(), 1);
+		Assert::same($this->presenter->product[1]->getId(), 2);
+		Assert::same($this->presenter->slug, 'brand-new-ruler-2');
+	}
+	
+	
+	public function testConvertAllParams()
+	{
+		$this->callPresenterAction($this->presenter, 'productConvertAllParams', ['slug' => 'brand-new-ruler-2', 'name' => 'Brand new ruler']);
+		Assert::type('array', $this->presenter->product);
+		Assert::type('array', $this->presenter->slug);
+		Assert::same($this->presenter->product[0]->getId(), 1);
+		Assert::same($this->presenter->product[1]->getId(), 2);
+		Assert::same($this->presenter->slug[0]->getId(), 1);
+		Assert::same($this->presenter->slug[1]->getId(), 2);
+	}
+	
+	
+	public function testConvertToOne()
+	{
+		$this->callPresenterAction($this->presenter, 'productConvertToOne', ['slug' => 'brand-new-ruler', 'name' => 'Brand new ruler']);
+		Assert::type('ZenifyTests\DoctrineMethodsHydrator\Entities\Product', $this->presenter->product);
+		Assert::type('ZenifyTests\DoctrineMethodsHydrator\Entities\Product', $this->presenter->slug);
+		Assert::same($this->presenter->product->getId(), 1);
+		Assert::same($this->presenter->slug->getId(), 1);
+	}
+	
+	
+	public function testConvertToOneAll()
+	{
+		$this->callPresenterAction($this->presenter, 'productConvertToOneAll', ['slug' => 'brand-new-ruler', 'name' => 'Brand new ruler']);
+		Assert::type('ZenifyTests\DoctrineMethodsHydrator\Entities\Product', $this->presenter->product);
+		Assert::type('ZenifyTests\DoctrineMethodsHydrator\Entities\Product', $this->presenter->slug);
+		Assert::same($this->presenter->product->getId(), 1);
+		Assert::same($this->presenter->slug->getId(), 1);
+	}
+	
+	
+	public function testConvertNameToOne()
+	{
+		$this->callPresenterAction($this->presenter, 'productConvertNameToOne', ['slug' => 'brand-new-ruler', 'name' => 'Brand new ruler']);
+		Assert::type('ZenifyTests\DoctrineMethodsHydrator\Entities\Product', $this->presenter->product);
+		Assert::type('string', $this->presenter->slug);
+		Assert::same($this->presenter->product->getId(), 1);
+		Assert::same($this->presenter->slug, 'brand-new-ruler');
+	}
+	
 
 	public function testNoValue()
 	{
@@ -138,21 +192,27 @@ class ConvertorTest extends BaseTestCase
 
 		$product = new Product;
 		$product->setName('Brand new ruler');
+		$product->setSlug('brand-new-ruler');
+
+		$product2 = new Product;
+		$product2->setName('Brand new ruler');
+		$product2->setSlug('brand-new-rule-2');
 
 		/** @var EntityManager $em */
 		$em = $this->container->getByType('Doctrine\ORM\EntityManager');
 		$em->persist($product);
+		$em->persist($product2);
 		$em->flush();
 	}
 
 
 	private function buildPresenter()
 	{
-		$this->presenter = new MockPresenter;
+		$this->presenter = new MockAnnotationPresenter;
 		$this->container->callMethod(array($this->presenter, 'injectPrimary'));
 	}
 
 }
 
 
-\run(new ConvertorTest($container));
+\run(new AnnotationConvertorTest($container));
