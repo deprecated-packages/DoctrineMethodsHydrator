@@ -9,3 +9,7 @@ extensions:
 doctrine:
 	driver: pdo_sqlite
 	memory: true
+
+
+services:
+	- ZenifyTests\DoctrineMethodsHydrator\UI\MockControlFactory

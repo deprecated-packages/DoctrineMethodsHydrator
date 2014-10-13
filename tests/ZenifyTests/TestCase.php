@@ -1,25 +1,34 @@
 <?php
 
-namespace ZenifyTests\DoctrineMethodsHydrator;
+/**
+ * This file is part of Zenify
+ * Copyright (c) 2012 Tomas Votruba (http://tomasvotruba.cz)
+ */
+
+namespace ZenifyTests;
 
 use Nette;
-use Tester\TestCase;
+use Nette\Application\Request;
+use Nette\Application\UI\Presenter;
+use Tester;
+use ZenifyTests\DoctrineMethodsHydrator\UI\MockPresenter;
 
 
-class BaseTestCase extends TestCase
+class TestCase extends Tester\TestCase
 {
 
 	/**
 	 * Simulates request calling presenter's action
-	 * @param Nette\Application\UI\Presenter $presenter
+	 *
+	 * @param Presenter $presenter
 	 * @param string $action
 	 * @param array $args
 	 * @return Nette\Application\IResponse
 	 */
-	protected function callPresenterAction($presenter, $action, $args = array())
+	protected function callPresenterAction(Presenter $presenter, $action, $args = array())
 	{
 		$args['action'] = $action;
-		$request = new Nette\Application\Request($presenter->getName(), 'GET', $args);
+		$request = new Request($presenter->getName(), 'GET', $args);
 		return $presenter->run($request);
 	}
 
@@ -28,11 +37,10 @@ class BaseTestCase extends TestCase
 	 * Call protected/private method of a class.
 	 * @source https://jtreminio.com/2013/03/unit-testing-tutorial-part-3-testing-protected-private-methods-coverage-reports-and-crap/
 	 *
-	 * @param object|Nette\Object  &$object    Instantiated object that we will run method on.
-	 * @param string  $methodName Method name to call
-	 * @param array  $parameters Array of parameters to pass into method.
-	 *
-	 * @return mixed Method return.
+	 * @param object|Nette\Object &$object Instantiated object that we will run method on.
+	 * @param string $methodName Method name to call
+	 * @param array $parameters Array of parameters to pass into method.
+	 * @return mixed
 	 */
 	public function invokeMethod(&$object, $methodName, array $parameters = [])
 	{

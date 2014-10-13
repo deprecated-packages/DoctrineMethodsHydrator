@@ -3,33 +3,49 @@
 namespace ZenifyTests\DoctrineMethodsHydrator\UI;
 
 use Nette;
-use Zenify\DoctrineMethodsHydrator\Application\TTryCall;
+use Zenify;
+use Zenify\DoctrineMethodsHydrator\MethodsHydrator;
 use ZenifyTests\DoctrineMethodsHydrator\Entities\Category;
 use ZenifyTests\DoctrineMethodsHydrator\Entities\Product;
 
 
 class MockPresenter extends Nette\Application\UI\Presenter
 {
-	use TTryCall;
 
-	/** @var Product */
+	/**
+	 * @var Product
+	 */
 	public $product;
 
-	/** @var Category */
+	/**
+	 * @var Category
+	 */
 	public $category;
+
+	/**
+	 * @inject
+	 * @var MethodsHydrator
+	 */
+	public $methodsHydrator;
+
+	/**
+	 * @inject
+	 * @var MockControlFactory
+	 */
+	public $mockControlFactory;
+
 
 
 	public function renderProduct(Product $product)
 	{
 		$this->product = $product;
 	}
-	
-	
+
+
 	public function renderProductOptional(Product $product = null)
 	{
 		$this->product = $product;
 	}
-
 
 
 	public function actionEdit(Product $product)
@@ -65,7 +81,18 @@ class MockPresenter extends Nette\Application\UI\Presenter
 	 */
 	protected function createComponentMockControl()
 	{
-		return new MockControl;
+		return $this->mockControlFactory->create();
+	}
+
+
+	/**
+	 * @param string $method
+	 * @param array $parameters
+	 * @return bool
+	 */
+	protected function tryCall($method, array $parameters)
+	{
+		return $this->methodsHydrator->hydrate($method, $parameters, $this);
 	}
 
 }

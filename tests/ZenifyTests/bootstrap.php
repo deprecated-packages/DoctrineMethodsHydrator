@@ -5,7 +5,7 @@
  * Copyright (c) 2012 Tomas Votruba (http://tomasvotruba.cz)
  */
 
-if (@!include __DIR__ . '/../../vendor/autoload.php') {
+if (@ ! include __DIR__ . '/../../vendor/autoload.php') {
 	echo 'Install Nette Tester using `composer update --dev`';
 	exit(1);
 }
@@ -28,7 +28,7 @@ $_ENV = $_GET = $_POST = array();
 
 
 function run(Tester\TestCase $testCase) {
-	$testCase->run(isset($_SERVER['argv'][1]) ? $_SERVER['argv'][1] : NULL);
+	$testCase->run();
 }
 
 
