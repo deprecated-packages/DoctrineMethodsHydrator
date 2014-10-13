@@ -9,6 +9,6 @@ interface MockControlFactory
 	/**
 	 * @return MockControl
 	 */
-	public function create();
+	function create();
 
 }

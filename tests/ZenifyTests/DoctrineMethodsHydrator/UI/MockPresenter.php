@@ -35,14 +35,13 @@ class MockPresenter extends Nette\Application\UI\Presenter
 	public $mockControlFactory;
 
 
-
 	public function renderProduct(Product $product)
 	{
 		$this->product = $product;
 	}
 
 
-	public function renderProductOptional(Product $product = null)
+	public function renderProductOptional(Product $product = NULL)
 	{
 		$this->product = $product;
 	}
