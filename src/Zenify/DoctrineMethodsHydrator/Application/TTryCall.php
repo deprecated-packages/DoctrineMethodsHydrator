@@ -17,6 +17,7 @@ use Zenify;
  */
 trait TTryCall
 {
+
 	/**
 	 * @inject
 	 * @var \Zenify\DoctrineMethodsHydrator\ParametersToEntitiesConvertor
@@ -45,7 +46,7 @@ trait TTryCall
 		$args = $rc->combineArgs($rm, $parameters);
 
 		if (preg_match('~^(action|render|handle).+~', $method)) {
-			$args = $this->getConvertor()->process($rm->parameters, $args);
+			$args = $this->getConvertor()->process($rm->parameters, $args, $rm);
 		}
 
 		$rm->invokeArgs($this, $args);
