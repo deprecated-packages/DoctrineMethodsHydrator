@@ -42,7 +42,7 @@ class TestCase extends Tester\TestCase
 	 * @param array $parameters Array of parameters to pass into method.
 	 * @return mixed
 	 */
-	public function invokeMethod(&$object, $methodName, array $parameters = [])
+	public function invokeMethod(&$object, $methodName, array $parameters = array())
 	{
 		if ($object instanceof Nette\Object) {
 			/** @var Nette\Object $object */

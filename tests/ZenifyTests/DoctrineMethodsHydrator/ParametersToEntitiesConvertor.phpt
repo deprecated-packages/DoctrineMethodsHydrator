@@ -93,8 +93,9 @@ class ParametersToEntitiesConvertorTest extends TestCase
 
 	public function testNoValue()
 	{
-		Assert::error(function() {
-			$this->callPresenterAction($this->presenter, 'product');
+		$that = $this;
+		Assert::error(function() use ($that) {
+			$that->callPresenterAction($that->presenter, 'product');
 		}, E_RECOVERABLE_ERROR);
 	}
 
