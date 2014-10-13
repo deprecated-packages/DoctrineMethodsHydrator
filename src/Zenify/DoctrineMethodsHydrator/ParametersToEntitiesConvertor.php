@@ -15,7 +15,10 @@ use Nette\Application\BadRequestException;
 
 class ParametersToEntitiesConvertor extends Nette\Object
 {
-	/** @var EntityManager */
+
+	/**
+	 * @var EntityManager
+	 */
 	private $em;
 
 
@@ -43,14 +46,15 @@ class ParametersToEntitiesConvertor extends Nette\Object
 
 
 	/**
-	 * @param string
-	 * @param int
+	 * @param string $entityName
+	 * @param int $id
 	 * @return object|NULL
 	 * @throws BadRequestException
 	 */
 	private function findById($entityName, $id)
 	{
 		$entity = $this->em->find($entityName, $id);
+
 		if ($entity === NULL) {
 			throw new BadRequestException('Entity "' . $entityName . '" with id = "' . $id . '" was not found.');
 		}
