@@ -9,7 +9,6 @@
 		}
 	],
 	"require": {
-		"php": ">=5.4",
 		"kdyby/doctrine": "~2.0",
 		"nette/application": "~2.0"
 	},
