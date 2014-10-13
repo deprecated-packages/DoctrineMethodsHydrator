@@ -10,7 +10,7 @@
 The best way to install is using [Composer](http://getcomposer.org/).
 
 ```sh
-$ composer require zenify/doctrine-methods-hydrator:@dev
+$ composer require zenify/doctrine-methods-hydrator
 ```
 
 Register the extension in `config.neon`:
@@ -20,15 +20,35 @@ extensions:
 	- Zenify\DoctrineMethodsHydrator\DI\MethodsHydratorExtension
 ```
 
-Place trait to your parent presenter or control:
+The goal of this extension is to enhance native `tryCall` method of `Control` to hydrate parameters of called methods.
+All `render*`, `action*` and `handle*` methods are hydrated, if entity class typehint is present if args definition.
+
+Use in presenter looks like this:
 
 ```php
 class Presenter extends Nette\Application\UI\Presenter
 {
-	use Zenify\DoctrineMethodsHydrator\Application\TTryCall;
 
+	/**
+	 * @inject
+   	 * @var \Zenify\DoctrineMethodsHydrator\MethodsHydrator
+   	 */
+   	public $methodsHydrator;
+
+	/**
+	 * @param string $method
+	 * @param array $parameters
+	 * @return bool
+	 */
+	protected function tryCall($method, array $parameters)
+	{
+		return $this->methodsHydrator->hydrate($method, $parameters, $this);
+	}
+	
 }
 ```
+
+For `Control`, you can use constructor or @inject with help of [DecoratorExtension](http://api.nette.org/2.3/Nette.DI.Extensions.DecoratorExtension.html).
 
 
 ## Profit
