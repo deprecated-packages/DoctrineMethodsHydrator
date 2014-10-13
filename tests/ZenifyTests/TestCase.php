@@ -25,7 +25,7 @@ class TestCase extends Tester\TestCase
 	 * @param array $args
 	 * @return Nette\Application\IResponse
 	 */
-	protected function callPresenterAction(Presenter $presenter, $action, $args = array())
+	public function callPresenterAction(Presenter $presenter, $action, $args = array())
 	{
 		$args['action'] = $action;
 		$request = new Request($presenter->getName(), 'GET', $args);
