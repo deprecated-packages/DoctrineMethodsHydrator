@@ -10,7 +10,7 @@
 The best way to install is using [Composer](http://getcomposer.org/).
 
 ```sh
-$ composer require zenify/doctrine-methods-hydrator:@dev
+$ composer require zenify/doctrine-methods-hydrator
 ```
 
 Register the extension in `config.neon`:
