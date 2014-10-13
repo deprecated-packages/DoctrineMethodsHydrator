@@ -15,8 +15,12 @@ use Nette\Application\BadRequestException;
 
 class ParametersToEntitiesConvertor extends Nette\Object
 {
-	/** @var EntityManager */
+
+	/**
+	 * @var EntityManager
+	 */
 	private $em;
+
 	private $args;
 
 
@@ -31,16 +35,17 @@ class ParametersToEntitiesConvertor extends Nette\Object
 	 */
 	public function process(array $methodParameters, array $args, $rm)
 	{
-		if($rm->hasAnnotation('hydratorMethod') && $rm->hasAnnotation('hydratorDao')) {
+		if ($rm->hasAnnotation('hydratorMethod') && $rm->hasAnnotation('hydratorDao')) {
 			return $this->useCustomMethod($methodParameters, $args, $rm);
+
 		} else {
 			return $this->useFindById($methodParameters, $args);
 		}
 	}
-	
-	
+
+
 	/**
-	 * 
+	 *
 	 * @param array $methodParameters
 	 * @param array $args
 	 * @return mixed[]
@@ -53,13 +58,13 @@ class ParametersToEntitiesConvertor extends Nette\Object
 				$args[$i] = $this->findById($className, $args[$i]);
 			}
 		}
-		
+
 		return $args;
 	}
-	
-	
+
+
 	/**
-	 * 
+	 *
 	 * @param array $methodParameters
 	 * @param array $args
 	 * @param Nette\Reflection\Method $rm
@@ -73,22 +78,20 @@ class ParametersToEntitiesConvertor extends Nette\Object
 		$this->args = $args;
 
 		$dao = new $hydratatorDao($this->em);
-		
+
 		foreach ($methodParameters as $i => $parameter) {
 			if ($parameter->className || $rm->hasAnnotation('hydratatorEntity')) {
-				
-				$className = !is_null($parameter->className) ? 
-					$parameter->className : $rm->getAnnotation('hydratatorEntity');
-				
-				if ($this->isEntity($className) && $args[$i] !== NULL && $args[$i] !== FALSE 
-					&& (is_null($rm->getAnnotation('convertParams')) || in_array($parameter->name, $convertParams))) {
-					
+				$className = ! is_null($parameter->className) ? $parameter->className : $rm->getAnnotation('hydratatorEntity');
+
+				if ($this->isEntity($className) && $args[$i] !== NULL && $args[$i] !== FALSE
+					&& (is_null($rm->getAnnotation('convertParams')) || in_array($parameter->name, $convertParams))
+				) {
 					$entity = call_user_func_array(array($dao, $hydratatorMethod), $this->args);
 					$args[$i] = $this->checkEntity($entity, $className, $args[$i]);
 				}
 			}
 		}
-		
+
 		return $args;
 	}
 
@@ -105,7 +108,7 @@ class ParametersToEntitiesConvertor extends Nette\Object
 		if ($entity === NULL) {
 			throw new BadRequestException('Entity "' . $entityName . '" with id = "' . $id . '" was not found.');
 		}
-		
+
 		return $entity;
 	}
 
@@ -124,10 +127,10 @@ class ParametersToEntitiesConvertor extends Nette\Object
 			return FALSE;
 		}
 	}
-	
-	
+
+
 	/**
-	 * 
+	 *
 	 * @param array $entity
 	 * @param string $className
 	 * @param mixed $arg
@@ -136,14 +139,14 @@ class ParametersToEntitiesConvertor extends Nette\Object
 	 */
 	private function checkEntity(array $entity, $className, $arg)
 	{
-		if (!count($entity)) {
+		if ( ! count($entity)) {
 			throw new BadRequestException('Entity "' . $className . '" with some column = "' . $arg . '" was not found.');
 		}
-		
-		if(count($entity) === 1) {
+
+		if (count($entity) === 1) {
 			$entity = $entity[0];
 		}
-		
+
 		return $entity;
 	}
 
