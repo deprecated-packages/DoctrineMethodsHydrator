@@ -39,7 +39,6 @@ class MethodsHydrator extends Nette\Object
 			return FALSE;
 		}
 
-
 		$rm = $rc->getMethod($method);
 		if ( ! $rm->isPublic() || $rm->isAbstract() || $rm->isStatic()) {
 			return FALSE;
