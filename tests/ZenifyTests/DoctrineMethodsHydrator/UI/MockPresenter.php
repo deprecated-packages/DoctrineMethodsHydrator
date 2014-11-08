@@ -3,7 +3,6 @@
 namespace ZenifyTests\DoctrineMethodsHydrator\UI;
 
 use Nette;
-use Zenify;
 use Zenify\DoctrineMethodsHydrator\MethodsHydrator;
 use ZenifyTests\DoctrineMethodsHydrator\Entities\Category;
 use ZenifyTests\DoctrineMethodsHydrator\Entities\Product;
