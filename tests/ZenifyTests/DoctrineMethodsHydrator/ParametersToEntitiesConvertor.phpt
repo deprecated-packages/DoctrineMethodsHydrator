@@ -52,14 +52,14 @@ class ParametersToEntitiesConvertorTest extends TestCase
 	 */
 	public function testNotEntity()
 	{
-		$this->callPresenterAction($this->presenter, 'category', array('category' => 5));
+		$this->callPresenterAction($this->presenter, 'category', ['category' => 5]);
 	}
 
 
 	public function testMethodTypes()
 	{
 		// render
-		$this->callPresenterAction($this->presenter, 'product', array('product' => 1));
+		$this->callPresenterAction($this->presenter, 'product', ['product' => 1]);
 		Assert::type(
 			'ZenifyTests\DoctrineMethodsHydrator\Entities\Product',
 			$this->presenter->product
@@ -69,7 +69,7 @@ class ParametersToEntitiesConvertorTest extends TestCase
 		$this->presenter->product = NULL;
 
 		// action
-		$this->callPresenterAction($this->presenter, 'edit', array('product' => 1));
+		$this->callPresenterAction($this->presenter, 'edit', ['product' => 1]);
 		Assert::type(
 			'ZenifyTests\DoctrineMethodsHydrator\Entities\Product',
 			$this->presenter->product
@@ -79,10 +79,10 @@ class ParametersToEntitiesConvertorTest extends TestCase
 		$this->presenter->product = NULL;
 
 		// handle
-		$this->callPresenterAction($this->presenter, 'default', array(
+		$this->callPresenterAction($this->presenter, 'default', [
 			'do' => 'delete',
 			'product' => 1
-		));
+		]);
 		Assert::type(
 			'ZenifyTests\DoctrineMethodsHydrator\Entities\Product',
 			$this->presenter->product
@@ -113,7 +113,7 @@ class ParametersToEntitiesConvertorTest extends TestCase
 	 */
 	public function testNotExistingId()
 	{
-		$this->callPresenterAction($this->presenter, 'product', array('product' => 5));
+		$this->callPresenterAction($this->presenter, 'product', ['product' => 5]);
 	}
 
 
