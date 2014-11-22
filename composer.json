@@ -3,12 +3,10 @@
 	"description": "Hydrates presenter methods from parameters to entities",
 	"license": "MIT",
 	"authors": [
-		{
-			"name": "Tomáš Votruba",
-			"homepage": "http://tomasvotruba.cz"
-		}
+		{ "name": "Tomáš Votruba", "homepage": "http://tomasvotruba.cz" }
 	],
 	"require": {
+		"php": ">=5.4",
 		"kdyby/doctrine": "~2.0",
 		"nette/application": "~2.0"
 	},
