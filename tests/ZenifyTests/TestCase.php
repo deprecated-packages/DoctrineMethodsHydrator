@@ -11,7 +11,6 @@ use Nette;
 use Nette\Application\Request;
 use Nette\Application\UI\Presenter;
 use Tester;
-use ZenifyTests\DoctrineMethodsHydrator\UI\MockPresenter;
 
 
 class TestCase extends Tester\TestCase

@@ -41,4 +41,4 @@ class ExtensionTest extends TestCase
 }
 
 
-\run(new ExtensionTest($container));
+(new ExtensionTest($container))->run();

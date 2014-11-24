@@ -162,4 +162,4 @@ class ParametersToEntitiesConvertorTest extends TestCase
 }
 
 
-\run(new ParametersToEntitiesConvertorTest($container));
+(new ParametersToEntitiesConvertorTest($container))->run();

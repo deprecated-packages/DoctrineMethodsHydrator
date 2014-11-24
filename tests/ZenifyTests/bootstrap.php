@@ -21,11 +21,6 @@ function createTempDir() {
 }
 
 
-function run(Tester\TestCase $testCase) {
-	$testCase->run();
-}
-
-
 $configurator = new Nette\Configurator;
 $configurator->setTempDirectory(TEMP_DIR);
 $configurator->addConfig(__DIR__ . '/config/default.neon');
