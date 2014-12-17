@@ -7,11 +7,10 @@
 
 namespace Zenify\DoctrineMethodsHydrator;
 
-use Nette;
 use Nette\Application\UI\Control;
 
 
-class MethodsHydrator extends Nette\Object
+class MethodsHydrator
 {
 
 	/**

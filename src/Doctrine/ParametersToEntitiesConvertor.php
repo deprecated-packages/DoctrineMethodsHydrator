@@ -9,22 +9,21 @@ namespace Zenify\DoctrineMethodsHydrator;
 
 use Doctrine;
 use Kdyby\Doctrine\EntityManager;
-use Nette;
 use Nette\Application\BadRequestException;
 
 
-class ParametersToEntitiesConvertor extends Nette\Object
+class ParametersToEntitiesConvertor
 {
 
 	/**
 	 * @var EntityManager
 	 */
-	private $em;
+	private $entityManager;
 
 
-	public function __construct(EntityManager $em)
+	public function __construct(EntityManager $entityManager)
 	{
-		$this->em = $em;
+		$this->entityManager = $entityManager;
 	}
 
 
@@ -53,7 +52,7 @@ class ParametersToEntitiesConvertor extends Nette\Object
 	 */
 	private function findById($entityName, $id)
 	{
-		$entity = $this->em->find($entityName, $id);
+		$entity = $this->entityManager->find($entityName, $id);
 
 		if ($entity === NULL) {
 			throw new BadRequestException('Entity "' . $entityName . '" with id = "' . $id . '" was not found.');
@@ -70,7 +69,7 @@ class ParametersToEntitiesConvertor extends Nette\Object
 	private function isEntity($className)
 	{
 		try {
-			$this->em->getClassMetadata($className);
+			$this->entityManager->getClassMetadata($className);
 			return TRUE;
 
 		} catch (Doctrine\Common\Persistence\Mapping\MappingException $e) {

@@ -1,17 +1,5 @@
 <?php
 
-if (@ ! include __DIR__ . '/../../vendor/autoload.php') {
-	echo 'Install Nette Tester using `composer update --dev`';
-	exit(1);
-}
-
-Tester\Environment::setup();
-
-
-define('TEMP_DIR', createTempDir());
-Tracy\Debugger::$logDirectory = TEMP_DIR;
-
-
 /** @return string */
 function createTempDir() {
 	@mkdir(__DIR__ . '/../tmp'); // @ - directory may exists
