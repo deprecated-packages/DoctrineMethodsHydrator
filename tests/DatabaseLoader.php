@@ -2,7 +2,6 @@
 
 namespace Zenify\DoctrineMethodsHydrator\Tests;
 
-
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManager;
 use Zenify\DoctrineMethodsHydrator\Tests\Entities\Product;

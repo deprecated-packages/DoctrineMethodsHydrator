@@ -3,9 +3,9 @@
 namespace Zenify\DoctrineMethodsHydrator\Tests\UI;
 
 use Nette;
+use Zenify\DoctrineMethodsHydrator\MethodsHydrator;
 use Zenify\DoctrineMethodsHydrator\Tests\Entities\Category;
 use Zenify\DoctrineMethodsHydrator\Tests\Entities\Product;
-use Zenify\DoctrineMethodsHydrator\MethodsHydrator;
 
 
 class MockPresenter extends Nette\Application\UI\Presenter
