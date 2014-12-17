@@ -1,8 +1,10 @@
 # Zenify/DoctrineMethodsHydrator
 
-[![Build Status](https://travis-ci.org/Zenify/DoctrineMethodsHydrator.svg?branch=master)](https://travis-ci.org/Zenify/DoctrineMethodsHydrator)
-[![Downloads this Month](https://img.shields.io/packagist/dm/zenify/doctrine-methods-hydrator.svg)](https://packagist.org/packages/zenify/doctrine-methods-hydrator)
-[![Latest stable](https://img.shields.io/packagist/v/zenify/doctrine-methods-hydrator.svg)](https://packagist.org/packages/zenify/doctrine-methods-hydrator)
+[![Build Status](https://img.shields.io/travis/Zenify/DoctrineMethodsHydrator.svg?style=flat-square)](https://travis-ci.org/Zenify/DoctrineMethodsHydrator)
+[![Quality Score](https://img.shields.io/scrutinizer/g/Zenify/DoctrineMethodsHydrator.svg?style=flat-square)](https://scrutinizer-ci.com/g/Zenify/DoctrineMethodsHydrator)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/Zenify/DoctrineMethodsHydrator.svg?style=flat-square)](https://scrutinizer-ci.com/g/Zenify/DoctrineMethodsHydrator)
+[![Downloads this Month](https://img.shields.io/packagist/dm/zenify/doctrine-methods-hydrator.svg?style=flat-square)](https://packagist.org/packages/zenify/doctrine-methods-hydrator)
+[![Latest stable](https://img.shields.io/packagist/v/zenify/doctrine-methods-hydrator.svg?style=flat-square)](https://packagist.org/packages/zenify/doctrine-methods-hydrator)
 
 
 ## Installation
