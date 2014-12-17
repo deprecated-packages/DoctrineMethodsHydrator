@@ -3,9 +3,13 @@
 namespace ZenifyTests\DoctrineMethodsHydrator\DI;
 
 use Nette\DI\Container;
+use PHPUnit_Framework_TestCase;
+use Zenify\DoctrineMethodsHydrator\Doctrine\ParametersToEntitiesConvertor;
+use Zenify\DoctrineMethodsHydrator\MethodsHydrator;
+use Zenify\DoctrineMethodsHydrator\Tests\ContainerFactory;
 
 
-class MethodsHydratorExtensionTest
+class MethodsHydratorExtensionTest extends PHPUnit_Framework_TestCase
 {
 
 	/**
@@ -22,14 +26,14 @@ class MethodsHydratorExtensionTest
 
 	public function testExtension()
 	{
-		Assert::type(
-			'Zenify\DoctrineMethodsHydrator\ParametersToEntitiesConvertor',
-			$this->container->getByType('Zenify\DoctrineMethodsHydrator\ParametersToEntitiesConvertor')
+		$this->assertInstanceOf(
+			ParametersToEntitiesConvertor::class,
+			$this->container->getByType(ParametersToEntitiesConvertor::class)
 		);
 
-		Assert::type(
-			'Zenify\DoctrineMethodsHydrator\MethodsHydrator',
-			$this->container->getByType('Zenify\DoctrineMethodsHydrator\MethodsHydrator')
+		$this->assertInstanceOf(
+			MethodsHydrator::class,
+			$this->container->getByType(MethodsHydrator::class)
 		);
 	}
 
