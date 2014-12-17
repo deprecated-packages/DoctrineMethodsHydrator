@@ -5,7 +5,7 @@
  * Copyright (c) 2012 Tomas Votruba (http://tomasvotruba.cz)
  */
 
-namespace Zenify\DoctrineMethodsHydrator;
+namespace Zenify\DoctrineMethodsHydrator\Doctrine;
 
 use Doctrine;
 use Kdyby\Doctrine\EntityManager;

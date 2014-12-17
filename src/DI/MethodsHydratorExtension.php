@@ -8,6 +8,8 @@
 namespace Zenify\DoctrineMethodsHydrator\DI;
 
 use Nette\DI\CompilerExtension;
+use Zenify\DoctrineMethodsHydrator\Doctrine\ParametersToEntitiesConvertor;
+use Zenify\DoctrineMethodsHydrator\MethodsHydrator;
 
 
 class MethodsHydratorExtension extends CompilerExtension
@@ -18,10 +20,10 @@ class MethodsHydratorExtension extends CompilerExtension
 		$builder = $this->getContainerBuilder();
 
 		$builder->addDefinition($this->prefix('hydrator'))
-			->setClass('Zenify\DoctrineMethodsHydrator\MethodsHydrator');
+			->setClass(MethodsHydrator::class);
 
 		$builder->addDefinition($this->prefix('convertor'))
-			->setClass('Zenify\DoctrineMethodsHydrator\ParametersToEntitiesConvertor');
+			->setClass(ParametersToEntitiesConvertor::class);
 	}
 
 }

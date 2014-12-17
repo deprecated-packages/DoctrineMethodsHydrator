@@ -8,6 +8,7 @@
 namespace Zenify\DoctrineMethodsHydrator;
 
 use Nette\Application\UI\Control;
+use Zenify\DoctrineMethodsHydrator\Doctrine\ParametersToEntitiesConvertor;
 
 
 class MethodsHydrator
