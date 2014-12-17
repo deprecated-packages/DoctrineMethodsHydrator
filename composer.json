@@ -8,17 +8,14 @@
 	"require": {
 		"php": ">=5.5",
 		"kdyby/doctrine": "~2.0",
-		"nette/application": "~2.0"
+		"nette/application": "~2.2"
 	},
 	"require-dev": {
-		"nette/bootstrap": "~2.0",
-		"nette/di": "~2.0",
-		"nette/http": "~2.0",
-		"nette/mail": "~2.0",
-		"nette/robot-loader": "~2.0",
-		"nette/safe-stream": "~2.0",
-		"nette/security": "~2.0",
-		"nette/utils": "~2.0",
+		"nette/bootstrap": "~2.2",
+		"nette/di": "~2.2",
+		"nette/http": "~2.2",
+		"nette/mail": "~2.2",
+		"nette/safe-stream": "~2.2",
 		"zenify/coding-standard": "~3.0",
 		"jakub-onderka/php-parallel-lint": "~0.8",
 		"phpunit/phpunit": "~4.4"
