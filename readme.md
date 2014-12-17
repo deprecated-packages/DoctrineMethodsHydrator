@@ -9,7 +9,7 @@
 
 ## Installation
 
-The best way to install is using [Composer](http://getcomposer.org/).
+Install the latest version via composer:
 
 ```sh
 $ composer require zenify/doctrine-methods-hydrator
