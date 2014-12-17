@@ -1,6 +1,6 @@
 <?php
 
-namespace ZenifyTests\DoctrineMethodsHydrator\Entities;
+namespace Zenify\DoctrineMethodsHydrator\Tests\Entities;
 
 use Nette;
 

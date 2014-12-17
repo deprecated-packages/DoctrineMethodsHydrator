@@ -1,10 +1,10 @@
 <?php
 
-namespace ZenifyTests\DoctrineMethodsHydrator\UI;
+namespace Zenify\DoctrineMethodsHydrator\Tests\UI;
 
 use Nette;
-use ZenifyTests\DoctrineMethodsHydrator\Entities\Category;
-use ZenifyTests\DoctrineMethodsHydrator\Entities\Product;
+use Zenify\DoctrineMethodsHydrator\Tests\Entities\Category;
+use Zenify\DoctrineMethodsHydrator\Tests\Entities\Product;
 use Zenify\DoctrineMethodsHydrator\MethodsHydrator;
 
 

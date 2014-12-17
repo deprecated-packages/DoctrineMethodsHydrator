@@ -1,4 +1,5 @@
 services:
+	- Zenify\DoctrineMethodsHydrator\Tests\DatabaseLoader
 	- Zenify\DoctrineMethodsHydrator\Tests\UI\MockControlFactory
 
 

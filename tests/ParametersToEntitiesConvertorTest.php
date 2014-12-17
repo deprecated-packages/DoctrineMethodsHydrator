@@ -1,27 +1,18 @@
 <?php
 
-namespace ZenifyTests\DoctrineMethodsHydrator;
+namespace Zenify\DoctrineMethodsHydrator\Tests;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\ORM\EntityManager;
 use Nette;
-use Tester\Assert;
+use Nette\Application\Request;
+use Nette\Application\UI\Presenter;
+use PHPUnit_Framework_TestCase;
 use Zenify;
-use ZenifyTests\DoctrineMethodsHydrator\Entities\Product;
-use ZenifyTests\DoctrineMethodsHydrator\UI\MockPresenter;
-use ZenifyTests\TestCase;
+use Zenify\DoctrineMethodsHydrator\Tests\Entities\Product;
+use Zenify\DoctrineMethodsHydrator\Tests\UI\MockPresenter;
 
 
-$container = require_once __DIR__ . '/../bootstrap.php';
-
-
-class ParametersToEntitiesConvertorTest extends TestCase
+class ParametersToEntitiesConvertorTest extends PHPUnit_Framework_TestCase
 {
-
-	/**
-	 * @var bool
-	 */
-	private $isDbPrepared = FALSE;
 
 	/**
 	 * @var Nette\DI\Container
@@ -34,21 +25,23 @@ class ParametersToEntitiesConvertorTest extends TestCase
 	private $presenter;
 
 
-	public function __construct(Nette\DI\Container $container)
+	public function __construct()
 	{
-		$this->container = $container;
+		$this->container = (new ContainerFactory)->create();
 	}
 
 
 	protected function setUp()
 	{
+		/** @var DatabaseLoader $databaseLoader */
+		$databaseLoader = $this->container->getByType(DatabaseLoader::class);
+		$databaseLoader->loadProductTableWithOneItem();
 		$this->presenter = $this->buildPresenter();
-		$this->prepareDbData();
 	}
 
 
 	/**
-	 * @throws \Doctrine\ORM\Mapping\MappingException
+	 * @expectedException \Doctrine\ORM\Mapping\MappingException
 	 */
 	public function testNotEntity()
 	{
@@ -60,21 +53,15 @@ class ParametersToEntitiesConvertorTest extends TestCase
 	{
 		// render
 		$this->callPresenterAction($this->presenter, 'product', ['product' => 1]);
-		Assert::type(
-			'ZenifyTests\DoctrineMethodsHydrator\Entities\Product',
-			$this->presenter->product
-		);
-		Assert::same(1, $this->presenter->product->getId());
+		$this->assertInstanceOf(Product::class, $this->presenter->product);
+		$this->assertSame(1, $this->presenter->product->getId());
 
 		$this->presenter->product = NULL;
 
 		// action
 		$this->callPresenterAction($this->presenter, 'edit', ['product' => 1]);
-		Assert::type(
-			'ZenifyTests\DoctrineMethodsHydrator\Entities\Product',
-			$this->presenter->product
-		);
-		Assert::same(1, $this->presenter->product->getId());
+		$this->assertInstanceOf(Product::class, $this->presenter->product);
+		$this->assertSame(1, $this->presenter->product->getId());
 
 		$this->presenter->product = NULL;
 
@@ -83,69 +70,9 @@ class ParametersToEntitiesConvertorTest extends TestCase
 			'do' => 'delete',
 			'product' => 1
 		]);
-		Assert::type(
-			'ZenifyTests\DoctrineMethodsHydrator\Entities\Product',
-			$this->presenter->product
-		);
-		Assert::same(1, $this->presenter->product->getId());
-	}
 
-
-	public function testNoValue()
-	{
-		$presenter = $this->presenter;
-		$that = $this;
-		Assert::error(function() use ($presenter, $that) {
-			$that->callPresenterAction($presenter, 'product');
-		}, E_RECOVERABLE_ERROR);
-	}
-
-
-	public function testNoValueOptional()
-	{
-		$this->callPresenterAction($this->presenter, 'productOptional');
-		Assert::same($this->presenter->product, NULL);
-	}
-
-
-	/**
-	 * @throws \Nette\Application\BadRequestException
-	 */
-	public function testNotExistingId()
-	{
-		$this->callPresenterAction($this->presenter, 'product', ['product' => 5]);
-	}
-
-
-	public function testComponent()
-	{
-		$mockControl = $this->presenter['mockControl'];
-		Assert::type(
-			'ZenifyTests\DoctrineMethodsHydrator\UI\MockControl',
-			$mockControl
-		);
-	}
-
-
-	private function prepareDbData()
-	{
-		if ($this->isDbPrepared) {
-			return;
-		}
-
-		/** @var Connection $connection */
-		$connection = $this->container->getByType('Doctrine\DBAL\Connection');
-		$connection->query('CREATE TABLE product (id INTEGER NOT NULL, name string, PRIMARY KEY(id))');
-
-		$product = new Product;
-		$product->setName('Brand new ruler');
-
-		/** @var EntityManager $em */
-		$em = $this->container->getByType('Doctrine\ORM\EntityManager');
-		$em->persist($product);
-		$em->flush();
-
-		$this->isDbPrepared = TRUE;
+		$this->assertInstanceOf(Product::class, $this->presenter->product);
+		$this->assertSame(1, $this->presenter->product->getId());
 	}
 
 
@@ -159,7 +86,18 @@ class ParametersToEntitiesConvertorTest extends TestCase
 		return $presenter;
 	}
 
+
+	/**
+	 * @param Presenter $presenter
+	 * @param string $action
+	 * @param array $args
+	 * @return Nette\Application\IResponse
+	 */
+	private function callPresenterAction(Presenter $presenter, $action, $args = [])
+	{
+		$args['action'] = $action;
+		$request = new Request($presenter->getName(), 'GET', $args);
+		return $presenter->run($request);
+	}
+
 }
-
-
-(new ParametersToEntitiesConvertorTest($container))->run();

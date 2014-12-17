@@ -3,14 +3,9 @@
 namespace ZenifyTests\DoctrineMethodsHydrator\DI;
 
 use Nette\DI\Container;
-use Tester\Assert;
-use ZenifyTests\TestCase;
 
 
-$container = require_once __DIR__ . '/../../bootstrap.php';
-
-
-class ExtensionTest extends TestCase
+class MethodsHydratorExtensionTest
 {
 
 	/**
@@ -19,9 +14,9 @@ class ExtensionTest extends TestCase
 	private $container;
 
 
-	public function __construct(Container $container)
+	public function __construct()
 	{
-		$this->container = $container;
+		$this->container = (new ContainerFactory)->create();
 	}
 
 
@@ -39,6 +34,3 @@ class ExtensionTest extends TestCase
 	}
 
 }
-
-
-(new ExtensionTest($container))->run();

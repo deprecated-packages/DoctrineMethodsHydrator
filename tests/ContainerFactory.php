@@ -1,19 +1,34 @@
 <?php
 
-/** @return string */
-function createTempDir() {
-	@mkdir(__DIR__ . '/../tmp'); // @ - directory may exists
-	@mkdir($tempDir = __DIR__ . '/../tmp/' . (isset($_SERVER['argv']) ? md5(serialize($_SERVER['argv'])) : getmypid()));
-	Tester\Helpers::purge($tempDir);
-	return realpath($tempDir);
+namespace Zenify\DoctrineMethodsHydrator\Tests;
+
+use Nette\Configurator;
+use Nette\DI\Container;
+
+
+class ContainerFactory
+{
+
+	/**
+	 * @return Container
+	 */
+	public function create()
+	{
+		$configurator = new Configurator;
+		$configurator->setTempDirectory($this->createTempDir());
+		$configurator->addConfig(__DIR__ . '/config/default.neon');
+		return $configurator->createContainer();
+	}
+
+
+	/**
+	 * @return string
+	 */
+	private function createTempDir()
+	{
+		@mkdir(__DIR__ . '/temp'); // @ - directory may exists
+		@mkdir($tempDir = __DIR__ . '/temp/' . (isset($_SERVER['argv']) ? md5(serialize($_SERVER['argv'])) : getmypid()));
+		return realpath($tempDir);
+	}
+
 }
-
-
-$configurator = new Nette\Configurator;
-$configurator->setTempDirectory(TEMP_DIR);
-$configurator->addConfig(__DIR__ . '/config/default.neon');
-$configurator->createRobotLoader()
-	->addDirectory(__DIR__)
-	->register(TRUE);
-
-return $configurator->createContainer();

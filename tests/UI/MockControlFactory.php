@@ -1,6 +1,6 @@
 <?php
 
-namespace ZenifyTests\DoctrineMethodsHydrator\UI;
+namespace Zenify\DoctrineMethodsHydrator\Tests\UI;
 
 
 interface MockControlFactory
