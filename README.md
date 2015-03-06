@@ -7,9 +7,9 @@
 [![Latest stable](https://img.shields.io/packagist/v/zenify/doctrine-methods-hydrator.svg?style=flat-square)](https://packagist.org/packages/zenify/doctrine-methods-hydrator)
 
 
-## Installation
+## Install
 
-Install the latest version via composer:
+Via Composer
 
 ```sh
 $ composer require zenify/doctrine-methods-hydrator
@@ -24,6 +24,9 @@ extensions:
 
 The goal of this extension is to enhance native `tryCall` method of `Control` to hydrate parameters of called methods.
 All `render*`, `action*` and `handle*` methods are hydrated, if entity class typehint is present if args definition.
+
+
+## Usage
 
 Use in presenter looks like this:
 
@@ -53,7 +56,7 @@ class Presenter extends Nette\Application\UI\Presenter
 For `Control`, you can use constructor or @inject with help of [DecoratorExtension](http://api.nette.org/2.3/Nette.DI.Extensions.DecoratorExtension.html).
 
 
-## Profit
+### Use Case
 
 In template
 
