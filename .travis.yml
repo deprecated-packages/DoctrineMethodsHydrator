@@ -11,15 +11,16 @@ matrix:
       evn: NETTE_VERSION=2.2.*
 
 install:
+  - composer create-project --prefer-source --dev --no-interaction zenify/ci vendor/ci @dev
+  - . vendor/ci/travis/coverage-init.sh
   - sh -c 'if [ "$NETTE_VERSION" != "" ]; then composer require --no-update symfony/symfony=$NETTE_VERSION; fi;'
-  - if [ $PHP_TRAVIS_VERSION = "5.6" ]; then $PHPUNIT_FLAGS="--coverage-clover=coverage.clover"; fi
   - composer install --prefer-source
 
 before_script:
-  - vendor/bin/phpcs src tests --standard=vendor/zenify/coding-standard/src/ZenifyCodingStandard/ruleset.xml --extensions=php
+  - . vendor/ci/travis/static-analysis.sh
 
 script:
   - phpunit $PHPUNIT_FLAGS
 
 after_script:
-  - if [ $PHP_TRAVIS_VERSION = "5.6" ]; then wget https://scrutinizer-ci.com/ocular.phar && php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi
+  - . vendor/ci/travis/coverage-send.sh
