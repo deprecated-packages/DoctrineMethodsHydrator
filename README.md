@@ -1,4 +1,4 @@
-# Zenify/DoctrineMethodsHydrator
+# Doctrine Methods Hydrator
 
 [![Build Status](https://img.shields.io/travis/Zenify/DoctrineMethodsHydrator.svg?style=flat-square)](https://travis-ci.org/Zenify/DoctrineMethodsHydrator)
 [![Quality Score](https://img.shields.io/scrutinizer/g/Zenify/DoctrineMethodsHydrator.svg?style=flat-square)](https://scrutinizer-ci.com/g/Zenify/DoctrineMethodsHydrator)
