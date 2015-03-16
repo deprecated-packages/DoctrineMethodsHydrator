@@ -15,7 +15,7 @@ matrix:
 install:
   - composer create-project --prefer-source --dev --no-interaction zenify/ci vendor/ci @dev
   - . vendor/ci/travis/coverage-init.sh
-  - sh -c 'if [ "$NETTE_VERSION" != "" ]; then composer require --no-update nette/nette=$NETTE_VERSION; fi;'
+  - if [ "$NETTE_VERSION" != "" ]; then composer require --no-update nette/nette=$NETTE_VERSION; fi
   - composer install --prefer-source
 
 before_script:
