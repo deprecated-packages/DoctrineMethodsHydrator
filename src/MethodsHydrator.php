@@ -8,10 +8,11 @@
 namespace Zenify\DoctrineMethodsHydrator;
 
 use Nette\Application\UI\Control;
+use Zenify\DoctrineMethodsHydrator\Contract\MethodsHydratorInterface;
 use Zenify\DoctrineMethodsHydrator\Doctrine\ParametersToEntitiesConvertor;
 
 
-class MethodsHydrator
+class MethodsHydrator implements MethodsHydratorInterface
 {
 
 	/**
@@ -27,10 +28,7 @@ class MethodsHydrator
 
 
 	/**
-	 * @param string $method
-	 * @param array $parameters
-	 * @param Control $control
-	 * @return bool
+	 * {@inheritdoc}
 	 */
 	public function hydrate($method, array $parameters, Control $control)
 	{
