@@ -3,31 +3,45 @@
 namespace Zenify\DoctrineMethodsHydrator\Tests\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
-use Nette;
 
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="product")
- *
- * @method  int     getId()
- * @method  string  getName()
- * @method  Product setName()
  */
-class Product extends Nette\Object
+class Product
 {
 
 	/**
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
 	 * @ORM\GeneratedValue
+	 * @var int
 	 */
-	public $id;
+	private $id;
 
 	/**
 	 * @ORM\Column(type="string", nullable=TRUE)
 	 * @var string
 	 */
-	protected $name;
+	private $name;
+
+
+	/**
+	 * @param string $name
+	 */
+	public function __construct($name)
+	{
+		$this->name = $name;
+	}
+
+
+	/**
+	 * @return int
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 
 }
