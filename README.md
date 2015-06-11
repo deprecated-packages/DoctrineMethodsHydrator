@@ -36,7 +36,7 @@ class Presenter extends Nette\Application\UI\Presenter
 
 	/**
 	 * @inject
-   	 * @var \Zenify\DoctrineMethodsHydrator\Contract\MethodsHydratorInterface
+   	 * @var Zenify\DoctrineMethodsHydrator\Contract\MethodsHydratorInterface
    	 */
    	public $methodsHydrator;
 
