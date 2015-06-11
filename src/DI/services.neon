@@ -1,0 +1,3 @@
+services:
+	- Zenify\DoctrineMethodsHydrator\Doctrine\ParametersToEntitiesConvertor
+	- Zenify\DoctrineMethodsHydrator\MethodsHydrator

@@ -2,20 +2,20 @@
 
 namespace Zenify\DoctrineMethodsHydrator\Tests\UI;
 
-use Nette;
-use Zenify;
+use Nette\Application\UI\Control;
+use Zenify\DoctrineMethodsHydrator\Contract\MethodsHydratorInterface;
 
 
-class MockControl extends Nette\Application\UI\Control
+class MockControl extends Control
 {
 
 	/**
-	 * @var \Zenify\DoctrineMethodsHydrator\MethodsHydrator
+	 * @var MethodsHydratorInterface
 	 */
 	private $methodsHydrator;
 
 
-	public function __construct(Zenify\DoctrineMethodsHydrator\MethodsHydrator $methodsHydrator)
+	public function __construct(MethodsHydratorInterface $methodsHydrator)
 	{
 		$this->methodsHydrator = $methodsHydrator;
 	}

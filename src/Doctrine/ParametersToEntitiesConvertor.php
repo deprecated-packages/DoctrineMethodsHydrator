@@ -8,27 +8,29 @@
 namespace Zenify\DoctrineMethodsHydrator\Doctrine;
 
 use Doctrine;
-use Kdyby\Doctrine\EntityManager;
+use Doctrine\Common\Persistence\Mapping\MappingException;
+use Doctrine\ORM\EntityManagerInterface;
 use Nette\Application\BadRequestException;
+use Zenify\DoctrineMethodsHydrator\Contract\Doctrine\ParametersToEntitiesConvertorInterface;
 
 
-class ParametersToEntitiesConvertor
+class ParametersToEntitiesConvertor implements ParametersToEntitiesConvertorInterface
 {
 
 	/**
-	 * @var EntityManager
+	 * @var EntityManagerInterface
 	 */
 	private $entityManager;
 
 
-	public function __construct(EntityManager $entityManager)
+	public function __construct(EntityManagerInterface $entityManager)
 	{
 		$this->entityManager = $entityManager;
 	}
 
 
 	/**
-	 * @return mixed[]
+	 * {@inheritdoc}
 	 */
 	public function process(array $methodParameters, array $args)
 	{
@@ -47,15 +49,16 @@ class ParametersToEntitiesConvertor
 	/**
 	 * @param string $entityName
 	 * @param int $id
-	 * @return object|NULL
+	 * @return object
 	 * @throws BadRequestException
 	 */
 	private function findById($entityName, $id)
 	{
 		$entity = $this->entityManager->find($entityName, $id);
-
 		if ($entity === NULL) {
-			throw new BadRequestException('Entity "' . $entityName . '" with id = "' . $id . '" was not found.');
+			throw new BadRequestException(
+				sprintf('Entity "%s" with id "%s" was not found.', $entityName, $id)
+			);
 		}
 
 		return $entity;
@@ -72,7 +75,7 @@ class ParametersToEntitiesConvertor
 			$this->entityManager->getClassMetadata($className);
 			return TRUE;
 
-		} catch (Doctrine\Common\Persistence\Mapping\MappingException $e) {
+		} catch (MappingException $e) {
 			return FALSE;
 		}
 	}

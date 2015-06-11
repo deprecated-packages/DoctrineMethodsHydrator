@@ -2,19 +2,19 @@
 
 namespace Zenify\DoctrineMethodsHydrator\Tests\UI;
 
-use Nette;
-use Zenify\DoctrineMethodsHydrator\MethodsHydrator;
-use Zenify\DoctrineMethodsHydrator\Tests\Entities\Category;
-use Zenify\DoctrineMethodsHydrator\Tests\Entities\Product;
+use Nette\Application\UI\Presenter;
+use Zenify\DoctrineMethodsHydrator\Contract\MethodsHydratorInterface;
+use Zenify\DoctrineMethodsHydrator\Tests\Entity\Category;
+use Zenify\DoctrineMethodsHydrator\Tests\Entity\Product;
 
 
-class MockPresenter extends Nette\Application\UI\Presenter
+class MockPresenter extends Presenter
 {
 
 	/**
 	 * @var Product
 	 */
-	public $product;
+	private $product;
 
 	/**
 	 * @var Category
@@ -23,7 +23,7 @@ class MockPresenter extends Nette\Application\UI\Presenter
 
 	/**
 	 * @inject
-	 * @var MethodsHydrator
+	 * @var MethodsHydratorInterface
 	 */
 	public $methodsHydrator;
 
@@ -71,6 +71,15 @@ class MockPresenter extends Nette\Application\UI\Presenter
 	public function sendTemplate()
 	{
 		$this->terminate();
+	}
+
+
+	/**
+	 * @return Product
+	 */
+	public function getProduct()
+	{
+		return $this->product;
 	}
 
 

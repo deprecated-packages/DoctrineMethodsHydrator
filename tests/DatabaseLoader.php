@@ -3,8 +3,8 @@
 namespace Zenify\DoctrineMethodsHydrator\Tests;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\ORM\EntityManager;
-use Zenify\DoctrineMethodsHydrator\Tests\Entities\Product;
+use Doctrine\ORM\EntityManagerInterface;
+use Zenify\DoctrineMethodsHydrator\Tests\Entity\Product;
 
 
 class DatabaseLoader
@@ -21,12 +21,12 @@ class DatabaseLoader
 	private $connection;
 
 	/**
-	 * @var EntityManager
+	 * @var EntityManagerInterface
 	 */
 	private $entityManager;
 
 
-	public function __construct(Connection $connection, EntityManager $entityManager)
+	public function __construct(Connection $connection, EntityManagerInterface $entityManager)
 	{
 		$this->connection = $connection;
 		$this->entityManager = $entityManager;
@@ -41,10 +41,7 @@ class DatabaseLoader
 
 		$this->connection->query('CREATE TABLE product (id INTEGER NOT NULL, name string, PRIMARY KEY(id))');
 
-		$product = new Product;
-		$product->setName('Brand new ruler');
-
-		$this->entityManager->persist($product);
+		$this->entityManager->persist(new Product('Brand new ruler'));
 		$this->entityManager->flush();
 
 		$this->isDbPrepared = TRUE;
