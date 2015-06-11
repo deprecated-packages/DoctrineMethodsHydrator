@@ -1,6 +1,6 @@
 <?php
 
-namespace Zenify\DoctrineMethodsHydrator\Tests\Entities;
+namespace Zenify\DoctrineMethodsHydrator\Tests\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

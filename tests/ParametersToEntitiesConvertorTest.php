@@ -8,7 +8,7 @@ use Nette\Application\Request;
 use Nette\Application\UI\Presenter;
 use Nette\DI\Container;
 use PHPUnit_Framework_TestCase;
-use Zenify\DoctrineMethodsHydrator\Tests\Entities\Product;
+use Zenify\DoctrineMethodsHydrator\Tests\Entity\Product;
 use Zenify\DoctrineMethodsHydrator\Tests\UI\MockPresenter;
 
 

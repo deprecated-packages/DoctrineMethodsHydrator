@@ -4,7 +4,7 @@ namespace Zenify\DoctrineMethodsHydrator\Tests;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
-use Zenify\DoctrineMethodsHydrator\Tests\Entities\Product;
+use Zenify\DoctrineMethodsHydrator\Tests\Entity\Product;
 
 
 class DatabaseLoader
