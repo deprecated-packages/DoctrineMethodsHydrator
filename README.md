@@ -36,9 +36,10 @@ class Presenter extends Nette\Application\UI\Presenter
 
 	/**
 	 * @inject
-   	 * @var \Zenify\DoctrineMethodsHydrator\MethodsHydrator
+   	 * @var \Zenify\DoctrineMethodsHydrator\Contract\MethodsHydratorInterface
    	 */
    	public $methodsHydrator;
+
 
 	/**
 	 * @param string $method
@@ -53,7 +54,7 @@ class Presenter extends Nette\Application\UI\Presenter
 }
 ```
 
-For `Control`, you can use constructor or @inject with help of [DecoratorExtension](http://api.nette.org/2.3/Nette.DI.Extensions.DecoratorExtension.html).
+For `Control`, you can use constructor or `@inject` with help of [DecoratorExtension](http://api.nette.org/2.3/Nette.DI.Extensions.DecoratorExtension.html).
 
 
 ### Use Case
@@ -61,7 +62,7 @@ For `Control`, you can use constructor or @inject with help of [DecoratorExtensi
 In template
 
 ```html
-<a n:href="Product:detail, product => $product->id">Product detail</a>
+<a n:href="Product:detail, product => $product->getId()">Product detail</a>
 ```
 
 In presenter
