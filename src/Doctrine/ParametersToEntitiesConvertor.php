@@ -7,14 +7,13 @@
 
 namespace Zenify\DoctrineMethodsHydrator\Doctrine;
 
-use Doctrine;
 use Doctrine\Common\Persistence\Mapping\MappingException;
 use Doctrine\ORM\EntityManagerInterface;
 use Nette\Application\BadRequestException;
 use Zenify\DoctrineMethodsHydrator\Contract\Doctrine\ParametersToEntitiesConvertorInterface;
 
 
-class ParametersToEntitiesConvertor implements ParametersToEntitiesConvertorInterface
+final class ParametersToEntitiesConvertor implements ParametersToEntitiesConvertorInterface
 {
 
 	/**

@@ -12,7 +12,7 @@ use Zenify\DoctrineMethodsHydrator\Tests\Entity\Product;
 use Zenify\DoctrineMethodsHydrator\Tests\UI\MockPresenter;
 
 
-class ParametersToEntitiesConvertorTest extends PHPUnit_Framework_TestCase
+final class ParametersToEntitiesConvertorTest extends PHPUnit_Framework_TestCase
 {
 
 	/**

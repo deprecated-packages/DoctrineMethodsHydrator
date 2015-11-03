@@ -10,14 +10,18 @@ namespace Zenify\DoctrineMethodsHydrator\DI;
 use Nette\DI\CompilerExtension;
 
 
-class MethodsHydratorExtension extends CompilerExtension
+final class MethodsHydratorExtension extends CompilerExtension
 {
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function loadConfiguration()
 	{
-		$containerBuilder = $this->getContainerBuilder();
-		$services = $this->loadFromFile(__DIR__ . '/services.neon');
-		$this->compiler->parseServices($containerBuilder, $services);
+		$this->compiler->parseServices(
+			$this->getContainerBuilder(),
+			$this->loadFromFile(__DIR__ . '/../config/services.neon')
+		);
 	}
 
 }

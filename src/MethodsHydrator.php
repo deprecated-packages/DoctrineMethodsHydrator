@@ -12,7 +12,7 @@ use Zenify\DoctrineMethodsHydrator\Contract\MethodsHydratorInterface;
 use Zenify\DoctrineMethodsHydrator\Doctrine\ParametersToEntitiesConvertor;
 
 
-class MethodsHydrator implements MethodsHydratorInterface
+final class MethodsHydrator implements MethodsHydratorInterface
 {
 
 	/**
