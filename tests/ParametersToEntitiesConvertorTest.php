@@ -71,6 +71,9 @@ final class ParametersToEntitiesConvertorTest extends PHPUnit_Framework_TestCase
 	}
 
 
+	/**
+	 * @param object $product
+	 */
 	private function validateProduct($product)
 	{
 		$this->assertInstanceOf(Product::class, $product);

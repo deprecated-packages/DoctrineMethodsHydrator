@@ -29,7 +29,7 @@ class MockPresenter extends Presenter
 
 	/**
 	 * @inject
-	 * @var MockControlFactory
+	 * @var MockControlFactoryInterface
 	 */
 	public $mockControlFactory;
 

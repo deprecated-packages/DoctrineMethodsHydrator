@@ -3,7 +3,7 @@
 namespace Zenify\DoctrineMethodsHydrator\Tests\UI;
 
 
-interface MockControlFactory
+interface MockControlFactoryInterface
 {
 
 	/**
