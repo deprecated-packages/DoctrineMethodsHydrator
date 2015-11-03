@@ -9,8 +9,6 @@
 
 ## Install
 
-Via Composer
-
 ```sh
 $ composer require zenify/doctrine-methods-hydrator
 ```
@@ -20,6 +18,8 @@ Register the extension in `config.neon`:
 ```yaml
 extensions:
 	- Zenify\DoctrineMethodsHydrator\DI\MethodsHydratorExtension
+	
+	# Kdyby\Doctrine or another Doctrine to Nette implementation
 ```
 
 The goal of this extension is to enhance native `tryCall` method of `Control` to hydrate parameters of called methods.
@@ -73,7 +73,7 @@ class SomePresenter extends Presenter
 
 	public function actionDetail(App\Entities\Product $product)
 	{
-		dump($product); // entity object
+		dump($product); // "App\Entities\Product" object
 	}
 
 }
